@@ -1,17 +1,17 @@
 # rocket-ws
 
-##rocket
+## rocket
 
-###https://lib.rs/crates/rocket
+### https://lib.rs/crates/rocket
 
-###Web framework for nightly with a focus on ease-of-use, expressibility, and speed
+### Web framework for nightly with a focus on ease-of-use, expressibility, and speed
 
 
-##ws
+## ws
 
-###https://lib.rs/crates/ws
+### https://lib.rs/crates/ws
 
-###Lightweight, event-driven WebSockets for Rust
+### Lightweight, event-driven WebSockets for Rust
 
 
 rust game server framework
