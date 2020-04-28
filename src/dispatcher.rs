@@ -1,7 +1,7 @@
-use ws::Sender;
 use serde_json::{self, Value};
-use std::sync::Mutex;
 use std::collections::HashMap;
+use std::sync::Mutex;
+use ws::Sender;
 
 lazy_static! {
     pub static ref DISPATCHER: Mutex<Dispatcher> = Mutex::new(Dispatcher::new());
@@ -45,9 +45,9 @@ impl Event {
     fn to_json(event: String, payload: String) -> String {
         let v: Value = serde_json::from_str(&payload).unwrap();
 
-        let object = Event{
-            event: event, 
-            payload: v
+        let object = Event {
+            event: event,
+            payload: v,
         };
         serde_json::to_string(&object).unwrap()
     }

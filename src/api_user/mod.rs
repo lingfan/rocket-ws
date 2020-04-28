@@ -1,6 +1,8 @@
-use rocket::http::RawStr;
 use rocket::http::{Cookie, Cookies};
+use rocket::http::RawStr;
 use rocket::response::{Flash, Redirect};
+use rocket::response;
+use rocket_contrib::json::Json;
 
 /// Retrieve the user's ID, if any.
 #[get("/user_id")]
@@ -22,33 +24,33 @@ pub fn hello(name: &RawStr) -> String {
     format!("Hello, {}!", name.as_str())
 }
 
-// #[derive(Debug, Deserialize)]
-// struct GetInfoPayload {
-//     name: String,
-// }
+#[derive(Debug, Deserialize)]
+struct GetInfoPayload {
+    name: String,
+}
 
-// #[derive(Debug, Deserialize)]
-// struct UpdateUserPayload {
-//     x: i64,
-//     y: i64,
-// }
+#[derive(Debug, Deserialize)]
+struct UpdateUserPayload {
+    x: i64,
+    y: i64,
+}
 
-// #[post("/user_get", data = "<payload>")]
-// pub fn get(payload: Json<GetInfoPayload>) -> Result<String, response::Failure> {
-//     match user::get(&payload.name) {
-//         Ok(()) => Ok("ok"),
-//         Err(e) => {
-//             println!("{:?}", e);
-//             Err(response::response::::Failure::from(Status::raw(400)))
-//         }
-//     }
-// }
+#[post("/user_get", data = "<payload>")]
+pub fn get(payload: Json<GetInfoPayload>) -> Result<String, response::Failure> {
+    match user::get(&payload.name) {
+        Ok(()) => Ok("ok".parse().unwrap()),
+        Err(e) => {
+            println!("{:?}", e);
+            Err(response::Failure::from(Status::raw(400)))
+        }
+    }
+}
 
-// #[post("/user_set", data = "<payload>")]
-// pub fn set(payload: Json<UpdateUserPayload>) -> Result<(), response::Failure> {
-//     let id = 1;
-//     match user::set(id, payload.x, payload.y) {
-//         Ok(_) => Ok(()),
-//         Err(_) => Err(response::Failure::from(Status::raw(400))),
-//     }
-// }
+#[post("/user_set", data = "<payload>")]
+pub fn set(payload: Json<UpdateUserPayload>) -> Result<(), response::Failure> {
+    let id = 1;
+    match user::set(id, payload.x, payload.y) {
+        Ok(_) => Ok(()),
+        Err(_) => Err(response::Failure::from(Status::raw(400))),
+    }
+}

@@ -5,7 +5,6 @@ use rocket::request::Form;
 use rocket::response::Redirect;
 use rocket_contrib::templates::Template;
 
-
 #[derive(FromForm)]
 pub struct Message {
     message: String,

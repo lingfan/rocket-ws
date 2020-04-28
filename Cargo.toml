@@ -1,5 +1,5 @@
 [package]
-name = "rocket_ws"
+name = "rocket-ws"
 version = "0.1.0"
 authors = ["elfhuv <elfhuv@qq.com>"]
 edition = "2018"
@@ -23,7 +23,6 @@ walkdir = "2.3.1"
 getopts = "0.2"
 url = "2.1.1"
 httparse = "1.3.4"
-openssl = "0.10.29"
 rust-crypto = "^0.2"
 hex = "0.4.2"
 sidekiq = "0.8.6"

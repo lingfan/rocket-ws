@@ -1,22 +1,20 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
+extern crate env_logger;
 #[macro_use]
 extern crate rocket;
 
-extern crate env_logger;
+use std::sync::mpsc::channel;
+use std::thread;
+
+use rocket_contrib::templates::Template;
 /// Simple WebSocket server with error handling. It is not necessary to setup logging, but doing
 /// so will allow you to see more details about the connection by using the RUST_LOG env variable.
-extern crate ws;
 
 
 use ws::listen;
-use rocket_contrib::templates::Template;
-use std::thread;
-use std::sync::mpsc::channel;
+
 use event::Event;
-
-
-
 
 #[get("/")]
 fn index() -> &'static str {
@@ -49,12 +47,11 @@ fn main() {
     thread::spawn(move || wsserver());
 
 
-
     let (tx, rx) = channel::<Event>();
     let (tx_logging, rx_logging) = channel::<Event>();
 
 
-    thread::spawn(|| ws::listen("127.0.0.1:3001", |out,rx| ws_server::server::Server::new(out,rx)));
+    thread::spawn(|| ws::listen("127.0.0.1:3001", |out, rx| ws_server::server::Server::new(out, rx)));
 
     rocket::ignite()
         .mount("/", routes![index])
