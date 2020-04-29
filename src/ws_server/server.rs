@@ -2,10 +2,7 @@ use std::rc::Rc;
 use std::sync::mpsc::Sender as ThreadSender;
 
 use ws::{CloseCode, Error, ErrorKind, Handler, Handshake, Message, Request, Response, Result, Sender};
-use ws::util::TcpStream;
 
-use settings::auth::Authorization;
-use utils::HttpData;
 
 use crate::event::{Event, MultiCastMessage};
 use crate::settings::auth::Authorization;

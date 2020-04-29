@@ -6,7 +6,6 @@ use std::sync::mpsc::Sender as ThreadSender;
 
 use ws::{Builder, Sender, Settings};
 
-use settings::auth::Authorization;
 
 use crate::event::Event;
 use crate::settings::auth::Authorization;

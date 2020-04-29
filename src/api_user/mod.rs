@@ -1,8 +1,8 @@
 use rocket::http::{Cookie, Cookies};
 use rocket::http::RawStr;
-use rocket::response::{Flash, Redirect};
-use rocket::response;
+use rocket::response::{self, Flash, Redirect};
 use rocket_contrib::json::Json;
+use crate::user;
 
 /// Retrieve the user's ID, if any.
 #[get("/user_id")]
@@ -39,10 +39,7 @@ struct UpdateUserPayload {
 pub fn get(payload: Json<GetInfoPayload>) -> Result<String, response::Failure> {
     match user::get(&payload.name) {
         Ok(()) => Ok("ok".parse().unwrap()),
-        Err(e) => {
-            println!("{:?}", e);
-            Err(response::Failure::from(Status::raw(400)))
-        }
+        Err(e) => None
     }
 }
 

@@ -1,12 +1,15 @@
 extern crate bson;
 extern crate chrono;
 extern crate config;
+extern crate crypto;
 extern crate hex;
 extern crate httparse;
 #[macro_use]
 extern crate log;
 extern crate r2d2_redis;
 extern crate redis;
+#[macro_use]
+extern crate rocket;
 #[macro_use]
 extern crate serde_derive;
 #[macro_use]

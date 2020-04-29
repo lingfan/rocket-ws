@@ -7,7 +7,6 @@ use httparse;
 use url::Url;
 use ws::{Error, ErrorKind, Result};
 
-use settings::auth::Authorization;
 
 use crate::settings::auth::Authorization;
 
