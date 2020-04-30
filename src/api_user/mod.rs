@@ -1,8 +1,7 @@
 use rocket::http::{Cookie, Cookies};
 use rocket::http::RawStr;
-use rocket::response::{self, Flash, Redirect};
+use rocket::response::{Flash, Redirect};
 use rocket_contrib::json::Json;
-use crate::user;
 
 /// Retrieve the user's ID, if any.
 #[get("/user_id")]
@@ -30,24 +29,18 @@ struct GetInfoPayload {
 }
 
 #[derive(Debug, Deserialize)]
-struct UpdateUserPayload {
+pub struct UpdateUserPayload {
     x: i64,
     y: i64,
 }
 
-#[post("/user_get", data = "<payload>")]
-pub fn get(payload: Json<GetInfoPayload>) -> Result<String, response::Failure> {
-    match user::get(&payload.name) {
-        Ok(()) => Ok("ok".parse().unwrap()),
-        Err(e) => None
-    }
+#[post("/user_get")]
+pub fn get() -> &'static str {
+    "Hello, world!"
 }
 
 #[post("/user_set", data = "<payload>")]
-pub fn set(payload: Json<UpdateUserPayload>) -> Result<(), response::Failure> {
-    let id = 1;
-    match user::set(id, payload.x, payload.y) {
-        Ok(_) => Ok(()),
-        Err(_) => Err(response::Failure::from(Status::raw(400))),
-    }
+pub fn set(payload: Json<UpdateUserPayload>) -> String {
+   
+    format!("Hello, {}!", payload.x)
 }

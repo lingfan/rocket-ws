@@ -1,4 +1,7 @@
 #![feature(proc_macro_hygiene, decl_macro)]
+#[warn(unused_variables)]
+#[warn(dead_code)]
+
 
 extern crate env_logger;
 #[macro_use]
@@ -12,9 +15,10 @@ use rocket_contrib::templates::Template;
 /// so will allow you to see more details about the connection by using the RUST_LOG env variable.
 
 
-use ws::listen;
+use crate::ws_server;
+use crate::user;
+use crate::api_user;
 
-use event::Event;
 
 #[get("/")]
 fn index() -> &'static str {
@@ -28,7 +32,7 @@ fn hello(name: String, age: u8) -> String {
 
 fn wsserver() {
     // Listen on an address and call the closure for each connection
-    if let Err(error) = listen("127.0.0.1:3012", |out| {
+    if let Err(error) = ws::listen("127.0.0.1:3012", |out| {
         // The handler needs to take ownership of out, so we use move
         move |msg| {
             // Handle messages received on this connection

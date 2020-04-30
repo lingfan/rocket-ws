@@ -1,9 +1,4 @@
-use std::env;
-use std::error::Error;
-
 use bson::ordered::OrderedDocument;
-use r2d2_redis::{redis, RedisConnectionManager};
-use r2d2_redis::r2d2::Pool;
 use sidekiq::{Client, ClientOpts, create_redis_pool, Job, JobOpts};
 
 pub struct Notifier {

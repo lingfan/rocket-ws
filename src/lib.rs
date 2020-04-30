@@ -1,3 +1,5 @@
+#![feature(decl_macro)]
+
 extern crate bson;
 extern crate chrono;
 extern crate config;

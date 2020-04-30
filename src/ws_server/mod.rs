@@ -1,7 +1,6 @@
 use std;
 use std::fs::File;
 use std::io::Read;
-use std::rc::Rc;
 use std::sync::mpsc::Sender as ThreadSender;
 
 use ws::{Builder, Sender, Settings};
@@ -17,10 +16,6 @@ pub fn run_server(connect_str: &str, max_connections: usize, tx: ThreadSender<Ev
     Builder::new().with_settings(Settings {
         max_connections: max_connections,
         panic_on_internal: false,
-        encrypt_server: match ssl {
-            Some(_) => true,
-            _ => false
-        },
         ..Settings::default()
     }).build(|out: Sender| {
         server::Server::new(out, tx.clone(), auth.clone())

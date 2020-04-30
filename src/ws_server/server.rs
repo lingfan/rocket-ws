@@ -1,7 +1,6 @@
-use std::rc::Rc;
 use std::sync::mpsc::Sender as ThreadSender;
 
-use ws::{CloseCode, Error, ErrorKind, Handler, Handshake, Message, Request, Response, Result, Sender};
+use ws::{CloseCode,  Handler, Handshake, Message, Request, Response, Result, Sender};
 
 
 use crate::event::{Event, MultiCastMessage};
